@@ -40,9 +40,11 @@ app.get('/getplace', (req, res) => {
         const youtubeurl = `www.youtube.com/watch?v=${youtubeId}`;
         const placename = places.data.candidates[0].name;
         const place_id = places.data.candidates[0].place_id;
+        const image = places.data.candidates[0].photos[0].photo_reference;
         const lat = places.data.candidates[0].geometry.location.lat;
         const lng = places.data.candidates[0].geometry.location.lng;
         const mapsurl = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}&query_place_id=${place_id}`;
+        const picture = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${image}&key=${placekey}`;
 
         const place = new Youtubegeo({
           title: title,
@@ -50,7 +52,8 @@ app.get('/getplace', (req, res) => {
           address: places.data.candidates[0].formatted_address,
           rating: places.data.candidates[0].rating,
           mapslink: mapsurl,
-          youtubelink: youtubeurl
+          youtubelink: youtubeurl,
+          picturelink: picture
         });
 
         // if (!Youtubegeo.title) {
