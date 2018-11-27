@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const axios = require('axios');
 
+const port = process.env.PORT || 2000;
+
 app.use(cors());
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -67,87 +69,13 @@ app.get('/getplace', (req, res) => {
     });
 });
 
-// app.get('/create', (req, res) => {
-//   const sensorValue = new sensorvalue({
-//     name: req.query.name,
-//     value: req.query.value
-//   });
-
-//   sensorValue
-//     .save()
-//     .then(response => {
-//       res.status(200).json(response);
-//     })
-
-//     .catch(error => {
-//       res.status(400).json(error);
-//     });
-// });
-
-// app.post('/postcreate', (req, res) => {
-//   const sensorValue = new sensorvalue({
-//     name: req.body.name,
-//     value: req.body.value
-//   });
-
-//   sensorValue
-//     .save()
-//     .then(response => {
-//       res.status(200).json(response);
-//     })
-
-//     .catch(error => {
-//       res.status(400).json(error);
-//     });
-// });
-
-// app.get('/delete', (req, res) => {
-//   const query = {
-//     name: req.query.name
-//   };
-
-//   sensorvalue
-//     .deleteMany(query)
-//     .then(response => {
-//       res.status(200).json(response);
-//     })
-//     .catch(errors => {
-//       res.status(400).json(errors);
-//     });
-// });
-
-// app.get('/getallmovies', (req, res) => {
-//   Movie.find({})
-//     .then(response => {
-//       res.status(200).json(response);
-//     })
-//     .catch(error => {
-//       res.status(400).json(error);
-//     });
-// });
-
-// app.get('/getalldata', (req, res) => {
-//   sensorvalue.find({}).then(result => {
-//     res.status(200).json(result);
-//   });
-// });
-
-// app.get('/deletemovie', (req, res) => {
-//   Movie.deleteMany({ title: req.query.title })
-//     .then(response => {
-//       res.status(200).json(response);
-//     })
-//     .catch(error => {
-//       res.status(400).json(error);
-//     });
-// });
-
 app.get('/getallplace', (req, res) => {
   Youtubegeo.find({})
     .then(response => {
       res.status(200).send(response);
     })
     .catch(error => {
+      console.log(error);
       res.status(400).send(error);
     });
 });
@@ -163,6 +91,6 @@ app.get('/deleteplace', (req, res) => {
     });
 });
 
-app.listen(2000, () => {
-  console.log('Server listening on port 2000');
+app.listen(port, () => {
+  console.log('Server listening on port', port);
 });
