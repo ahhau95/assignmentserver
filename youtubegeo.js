@@ -34,6 +34,10 @@ const sensorSchema = mongoose.Schema({
 
   youtubelink: {
     type: String
+  },
+
+  picturelink: {
+    type: String
   }
 });
 
