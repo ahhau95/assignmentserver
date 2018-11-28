@@ -37,7 +37,7 @@ app.get('/getplace', (req, res) => {
     .then(
       axios.spread((youtuberes, places) => {
         const youtubeId = youtuberes.data.items[0].id.videoId;
-        const youtubeurl = `www.youtube.com/watch?v=${youtubeId}`;
+        const youtubeurl = `https://www.youtube.com/watch?v=${youtubeId}`;
         const placename = places.data.candidates[0].name;
         const place_id = places.data.candidates[0].place_id;
         const image = places.data.candidates[0].photos[0].photo_reference;
@@ -83,7 +83,6 @@ app.get('/getallplace', (req, res) => {
     });
 });
 
-//localhost:5000/deletemovie?title=MovieTitle
 app.get('/deleteplace', (req, res) => {
   Youtubegeo.deleteMany({ title: req.query.title })
     .then(response => {
